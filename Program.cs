@@ -60,13 +60,14 @@ while (menuSelection != "6")
 
         case "2": // gestion des utilisateurs
             Console.Clear();
-            while (menuSelection != "4")
+            while (menuSelection != "5")
             {
                 Console.WriteLine("========== Gestion des utilisateurs ==========");
                 Console.WriteLine("1- Ajouter un utilisateur");
                 Console.WriteLine("2- Supprimer un utilisateur");
                 Console.WriteLine("3- Lister les utilisateurs");
-                Console.WriteLine("4- Retour au menu principal");
+                Console.WriteLine("4- Afficher un utilisateur");
+                Console.WriteLine("5- Retour au menu principal");
                 Console.WriteLine("==============================================");
                 Console.WriteLine("> Votre choix :");
                 readResult = Console.ReadLine();
@@ -77,12 +78,57 @@ while (menuSelection != "6")
                 switch (menuSelection)
                 {
                     case "1": // Ajouter un utilisateur
+                        string firstName = "";
+                        string lastName = "";
+                        string age = "";
+
+                        System.Console.WriteLine("> Saisissez le prénom de l'utilisateur :");
+                        readResult = Console.ReadLine();
+                        if (readResult != null)
+                        {
+                            firstName = readResult.Trim().ToLower();
+                        }
+                        System.Console.WriteLine("> Saisissez le nom de l'utilisateur :");
+                        readResult = Console.ReadLine();
+                        if (readResult != null)
+                        {
+                            lastName = readResult.Trim().ToLower();
+                        }
+                        System.Console.WriteLine("> Saisissez l'âge de l'utilisateur :");
+                        readResult = Console.ReadLine();
+                        if (readResult != null)
+                        {
+                            age = readResult.Trim().ToLower();
+                        }
+                        UserServices.CreateUser(firstName, lastName, age);
                         break;
 
                     case "2": // Supprimer un utilisateur
+                        int userId = 0;
+                        UserServices.GetAllUsers();
+                        System.Console.WriteLine("> Votre choix (ID):");
+                        readResult = Console.ReadLine();
+                        if (readResult != null)
+                        {
+                            userId = int.Parse(readResult);
+                        }
+                        UserServices.DeleteUser(userId);
                         break;
 
                     case "3": // Lister les utilisateurs
+                        UserServices.GetAllUsers();
+                        break;
+
+                    case "4": // Afficher un utilisateur
+                        int id = 0;
+                        UserServices.GetAllUsers();
+                        System.Console.WriteLine("> Votre choix (ID):");
+                        readResult = Console.ReadLine();
+                        if (readResult != null)
+                        {
+                            id = int.Parse(readResult);
+                        }
+                        UserServices.GetUserById(id);
                         break;
 
                     default:
