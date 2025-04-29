@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SQLITE-Gestionnaire-bibliothèque")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+68836fc11fc2d6edc5e9a2c30b446d9d09643755")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+831b6301ee6488e169cdb30c199b9c943e3a3ecf")]
 [assembly: System.Reflection.AssemblyProductAttribute("SQLITE-Gestionnaire-bibliothèque")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SQLITE-Gestionnaire-bibliothèque")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

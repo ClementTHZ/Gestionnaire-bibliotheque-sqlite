@@ -4,8 +4,8 @@ DROP TABLE emprunts;
 
 CREATE TABLE books (
     id INTEGER PRIMARY KEY,
-    title TEXT, 
-    descripiton TEXT, 
+    title TEXT UNIQUE, 
+    description TEXT, 
     author TEXT, 
     quantity INTEGER  DEFAULT 1
 );
@@ -24,7 +24,7 @@ CREATE TABLE emprunts (
     created_at DATETIME DEFAULT '2025-04-29'
 );
 
-INSERT INTO books (title, descripiton, author) 
+INSERT INTO books (title, description, author) 
 VALUES
 ('Le mystère de la chambre jaune', 'Une enquête pleine de rebondissements dans un vieux manoir', 'Gaston Leroux'),
 ('L''île perdue', 'Un groupe d’amis découvre une île pleine de secrets', 'Marie Fontaine'),

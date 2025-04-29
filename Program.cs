@@ -1,5 +1,6 @@
 ﻿var menuSelection = "";
 var readResult = "";
+int id = 0;
 
 while (menuSelection != "6")
 {
@@ -23,14 +24,15 @@ while (menuSelection != "6")
     {
         case "1": // Gestion des livres
             Console.Clear();
-            while (menuSelection != "5")
+            while (menuSelection != "6")
             {
                 Console.WriteLine("========== Gestion des livres ==========");
                 Console.WriteLine("1- Ajouter un livre");
                 Console.WriteLine("2- Supprimer un livre");
                 Console.WriteLine("3- Lister les livres");
                 Console.WriteLine("4- Lister les livres disponibles");
-                Console.WriteLine("5- Retour au menu principal");
+                Console.WriteLine("5- Afficher les détails d'un livre");
+                Console.WriteLine("6- Retour au menu principal");
                 Console.WriteLine("========================================");
                 Console.WriteLine("> Votre choix :");
                 readResult = Console.ReadLine();
@@ -41,15 +43,50 @@ while (menuSelection != "6")
                 switch (menuSelection)
                 {
                     case "1": // Ajouter un livre
+                        string title = "";
+                        string description = "";
+                        string author = "";
+
+                        System.Console.WriteLine("> Saisissez le titre du livre :");
+                        readResult = Console.ReadLine();
+                        if (readResult != null)
+                        {
+                            title = readResult.Trim().ToLower();
+                        }
+                        System.Console.WriteLine("> Saisissez la description du livre :");
+                        readResult = Console.ReadLine();
+                        if (readResult != null)
+                        {
+                            description = readResult.Trim().ToLower();
+                        }
+                        System.Console.WriteLine("> Saisissez l'auteur du livre :");
+                        readResult = Console.ReadLine();
+                        if (readResult != null)
+                        {
+                            author = readResult.Trim().ToLower();
+                        }
+                        BookServices.CreateBook(title, description, author);
                         break;
 
                     case "2": // Supprimer un livre
                         break;
 
                     case "3": // Lister les livres
+                        BookServices.GetAllBooks();
                         break;
 
                     case "4": // Lister les livres disponibles
+                        break;
+
+                    case "5": // Afficher les détails d'un livre
+                        BookServices.GetAllBooks();
+                        System.Console.WriteLine("> Votre choix (ID):");
+                        readResult = Console.ReadLine();
+                        if (readResult != null)
+                        {
+                            id = int.Parse(readResult);
+                        }
+                        BookServices.GetBookById(id);
                         break;
 
                     default:
@@ -104,15 +141,14 @@ while (menuSelection != "6")
                         break;
 
                     case "2": // Supprimer un utilisateur
-                        int userId = 0;
                         UserServices.GetAllUsers();
                         System.Console.WriteLine("> Votre choix (ID):");
                         readResult = Console.ReadLine();
                         if (readResult != null)
                         {
-                            userId = int.Parse(readResult);
+                            id = int.Parse(readResult);
                         }
-                        UserServices.DeleteUser(userId);
+                        UserServices.DeleteUser(id);
                         break;
 
                     case "3": // Lister les utilisateurs
@@ -120,7 +156,6 @@ while (menuSelection != "6")
                         break;
 
                     case "4": // Afficher un utilisateur
-                        int id = 0;
                         UserServices.GetAllUsers();
                         System.Console.WriteLine("> Votre choix (ID):");
                         readResult = Console.ReadLine();
