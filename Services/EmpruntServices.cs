@@ -80,7 +80,7 @@ public class EmpruntServices
         }
     }
 
-    private static DataTable GetDataTable(string sql, Dictionary<string, object> parameters = null)
+    private static DataTable GetDataTable(string sql, Dictionary<string, object>? parameters = null)
     {
         string dbfile = @"DataSource=C:\Users\ClémentTHOREZ\Documents\C#\Projet-C#\SQLITE-Gestionnaire-bibliothèque\db\gestionnaire-bibliotheque.db";
         using (var db = new SqliteConnection(dbfile))

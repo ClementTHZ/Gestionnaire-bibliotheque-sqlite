@@ -129,7 +129,7 @@ public class BookServices
         }
     }
 
-    private static DataTable GetDataTable(string sql, Dictionary<string, object> parameters = null)
+    private static DataTable GetDataTable(string sql, Dictionary<string, object>? parameters = null)
     {
         var dbfile = @"DataSource=C:\Users\ClémentTHOREZ\Documents\C#\Projet-C#\SQLITE-Gestionnaire-bibliothèque\db\gestionnaire-bibliotheque.db";
         using (var dbConnection = new SqliteConnection(dbfile))

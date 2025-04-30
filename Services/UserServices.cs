@@ -134,7 +134,7 @@ public class UserServices
         }
     }
 
-    private static DataTable GetDataTable(string sql, Dictionary<string, object> parameters = null)
+    private static DataTable GetDataTable(string sql, Dictionary<string, object>? parameters = null)
     // --> Pour Lire dans la base de donnée
     {
         string dbfile = @"DataSource=C:\Users\ClémentTHOREZ\Documents\C#\Projet-C#\SQLITE-Gestionnaire-bibliothèque\db\gestionnaire-bibliotheque.db";
