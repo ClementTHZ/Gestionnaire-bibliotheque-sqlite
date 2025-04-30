@@ -9,6 +9,6 @@ public class Book
         Title = title;
         Description = description;
         Author = author;
-        Quantity = 1;
+        Quantity = 0;
     }
 }

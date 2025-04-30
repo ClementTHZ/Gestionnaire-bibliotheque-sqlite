@@ -64,7 +64,7 @@ public class BookServices
         }
     }
 
-    public static void CreateBook(string title, string description, string author) // TODO Gérer la modification quantité si ID book existe déjà
+    public static void CreateBook(string title, string description, string author)
     {
         var book = new Book(title, description, author);
         try

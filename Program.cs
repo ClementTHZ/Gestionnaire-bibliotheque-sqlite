@@ -1,7 +1,7 @@
 ﻿var menuSelection = "";
 var readResult = "";
 int id = 0;
-
+int quantity = 0;
 while (menuSelection != "6")
 {
     Console.Clear();
@@ -71,15 +71,24 @@ while (menuSelection != "6")
                         Console.Clear();
                         BookServices.CreateBook(title, description, author);
 
+                        // TODO Finir l'ajout du stock après la création
                         System.Console.WriteLine();
-                        System.Console.WriteLine("> Taper entrée pour continuer");
+                        System.Console.WriteLine("> Ajouter du stock ?(y/n)");
                         Console.Write(">");
-                        Console.ReadLine();
+                        readResult = Console.ReadLine();
+                        if ((readResult != null)) readResult.Trim().ToLower();
+                        if (readResult == "Y")
+                        {
+                            System.Console.WriteLine("> Combien de livre voulez-vous ajouer ?");
+                            System.Console.Write(">");
+                            readResult = Console.ReadLine();
+                            if (readResult != null) quantity = int.Parse(readResult.Trim());
+                            BookServices.AddBook(id, quantity);
+                        }
+
                         break;
 
                     case "2": // Ajouter un livre
-                        int quantity = 0;
-
                         Console.Clear();
                         BookServices.GetAllBooks();
 
