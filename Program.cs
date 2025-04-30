@@ -71,7 +71,7 @@ while (menuSelection != "6")
                         Console.Clear();
                         BookServices.CreateBook(title, description, author);
 
-                        // TODO Finir l'ajout du stock après la création
+                        // TODO Finir l'ajout du stock après la création si Yes
                         System.Console.WriteLine();
                         System.Console.WriteLine("> Ajouter du stock ?(y/n)");
                         Console.Write(">");
@@ -285,7 +285,7 @@ while (menuSelection != "6")
             }
             break;
 
-        case "3": // Emprunter un livre
+        case "3": // Emprunter un livre --> TODO Modifier quantity quand livre emprunté
             int userId = 0;
             int bookId = 0;
 
@@ -309,7 +309,7 @@ while (menuSelection != "6")
             EmpruntServices.CreateEmprunt(userId, bookId);
             break;
 
-        case "4": // Rendre un livre
+        case "4": // Rendre un livre --> TODO Modifier quantity quand livre retourné
             Console.Clear();
             UserServices.GetAllUsers();
 
