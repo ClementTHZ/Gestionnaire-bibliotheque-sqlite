@@ -69,6 +69,14 @@ while (menuSelection != "6")
                         break;
 
                     case "2": // Supprimer un livre
+                        BookServices.GetAllBooks();
+                        System.Console.WriteLine("> Votre choix (ID):");
+                        readResult = Console.ReadLine();
+                        if (readResult != null)
+                        {
+                            id = int.Parse(readResult);
+                        }
+                        BookServices.DeleteBook(id);
                         break;
 
                     case "3": // Lister les livres
@@ -76,6 +84,7 @@ while (menuSelection != "6")
                         break;
 
                     case "4": // Lister les livres disponibles
+                        BookServices.GetAllBooksOnStock();
                         break;
 
                     case "5": // Afficher les détails d'un livre

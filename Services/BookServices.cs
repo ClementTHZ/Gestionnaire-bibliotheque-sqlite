@@ -15,6 +15,28 @@ public class BookServices
             System.Console.WriteLine($"---------------------------------------------------------------");
         }
     }
+    public static void GetAllBooksOnStock()
+    {
+        var books = GetDataTable("SELECT * FROM books WHERE quantity > 0");
+        foreach (DataRow book in books.Rows)
+        {
+            var bookQuantity = Convert.ToInt32(book["quantity"]);
+            if (bookQuantity < 2)
+            {
+                System.Console.WriteLine("");
+                System.Console.WriteLine($"---------------------------------------------------------------");
+                System.Console.WriteLine($"{book["id"]} - {book["title"]} / Autheur : {book["author"]} (Plus que {book["quantity"]} exemplaire en stock)");
+                System.Console.WriteLine($"---------------------------------------------------------------");
+            }
+            else
+            {
+                System.Console.WriteLine("");
+                System.Console.WriteLine($"---------------------------------------------------------------");
+                System.Console.WriteLine($"{book["id"]} - {book["title"]} / Autheur : {book["author"]} (En stock)");
+                System.Console.WriteLine($"---------------------------------------------------------------");
+            }
+        }
+    }
 
     public static void GetBookById(int id)
     {
