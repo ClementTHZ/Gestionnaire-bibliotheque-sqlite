@@ -6,34 +6,44 @@ public class BookServices
 {
     public static void GetAllBooks()
     {
-        var books = GetDataTable("SELECT * FROM books");
+        var books = GetDataTable("SELECT * FROM books ORDER BY quantity ASC");
         foreach (DataRow book in books.Rows)
         {
-            System.Console.WriteLine("");
-            System.Console.WriteLine($"---------------------------------------------------------------");
-            System.Console.WriteLine($"{book["id"]} - {book["title"]} / Autheur : {book["author"]}");
-            System.Console.WriteLine($"---------------------------------------------------------------");
+            var bookQuantity = Convert.ToInt32(book["quantity"]);
+            switch (bookQuantity)
+            {
+                case 0:
+                    System.Console.WriteLine("");
+                    System.Console.WriteLine($"{book["id"]} - {book["title"]} / Autheur : {book["author"]} (En rupture)");
+                    break;
+                case < 2:
+                    System.Console.WriteLine("");
+                    System.Console.WriteLine($"{book["id"]} - {book["title"]} / Autheur : {book["author"]} (Plus que {book["quantity"]} exemplaire en stock)");
+                    break;
+                case > 2:
+                    System.Console.WriteLine("");
+                    System.Console.WriteLine($"{book["id"]} - {book["title"]} / Autheur : {book["author"]} (En stock)");
+
+                    break;
+            }
         }
     }
+
     public static void GetAllBooksOnStock()
     {
-        var books = GetDataTable("SELECT * FROM books WHERE quantity > 0");
+        var books = GetDataTable("SELECT * FROM books WHERE quantity > 0 ORDER BY quantity ASC");
         foreach (DataRow book in books.Rows)
         {
             var bookQuantity = Convert.ToInt32(book["quantity"]);
             if (bookQuantity < 2)
             {
                 System.Console.WriteLine("");
-                System.Console.WriteLine($"---------------------------------------------------------------");
                 System.Console.WriteLine($"{book["id"]} - {book["title"]} / Autheur : {book["author"]} (Plus que {book["quantity"]} exemplaire en stock)");
-                System.Console.WriteLine($"---------------------------------------------------------------");
             }
             else
             {
                 System.Console.WriteLine("");
-                System.Console.WriteLine($"---------------------------------------------------------------");
                 System.Console.WriteLine($"{book["id"]} - {book["title"]} / Autheur : {book["author"]} (En stock)");
-                System.Console.WriteLine($"---------------------------------------------------------------");
             }
         }
     }
@@ -69,12 +79,30 @@ public class BookServices
         }
     }
 
+    public static void AddBook(int id, int quantity)
+    {
+        try
+        {
+            ExecuteQuery("UPDATE books SET quantity = quantity + @quantity WHERE id = @id", new Dictionary<string, object> { ["@quantity"] = quantity, ["@id"] = id });
+            var books = GetDataTable("SELECT * FROM books WHERE id = @id", new Dictionary<string, object> { ["@id"] = id });
+            foreach (DataRow book in books.Rows)
+            {
+                System.Console.WriteLine($"✅ Nouveau stock : {book["quantity"]} ");
+            }
+        }
+        catch (System.Exception err)
+        {
+            System.Console.WriteLine(err.Message);
+            throw;
+        }
+    }
+
     public static void DeleteBook(int id)
     {
         ExecuteQuery("DELETE FROM books WHERE id = @id", new Dictionary<string, object> { ["@id"] = id });
         try
         {
-            System.Console.WriteLine("✅ Le livre à été crée avec succès");
+            System.Console.WriteLine("✅ Le livre à été supprimé avec succès");
         }
         catch (System.Exception err)
         {
