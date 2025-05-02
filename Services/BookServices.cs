@@ -64,7 +64,23 @@ public class BookServices
         }
     }
 
-    public static void CreateBook(string title, string description, string author)
+    public static int CreateBook(string title, string description, string author)
+    {
+        var book = new Book(title, description, author);
+        try
+        {
+            var table = GetDataTable("INSERT INTO books (title, description, author, quantity) VALUES (@title, @description, @author, 0); SELECT id FROM books ORDER BY id DESC LIMIT 1", new Dictionary<string, object> { ["@title"] = book.Title, ["@description"] = book.Description, ["@author"] = book.Author });
+            System.Console.WriteLine("✅ Le livre à été crée avec succès");
+            return (int)table.Rows[0]["id"];
+        }
+        catch (System.Exception err)
+        {
+            System.Console.WriteLine(err.Message);
+            throw;
+        }
+    }
+
+    public static void CreateBook_gg(string title, string description, string author)
     {
         var book = new Book(title, description, author);
         try
@@ -117,7 +133,7 @@ public class BookServices
         var currBook = GetDataTable("SELECT * FROM books ORDER BY id DESC LIMIT 1");
         foreach (DataRow book in currBook.Rows)
         {
-            id = Convert.ToInt32(book["id"]); // TODO Comprendre pourquoi ToInt32 et non int.Parse
+            id = (int)book["id"];  // TODO Comprendre pourquoi ToInt32 et non int.Parse
         }
         if (id != 0) AddBook(id, quantity);
         else System.Console.WriteLine($"Id: {id}");

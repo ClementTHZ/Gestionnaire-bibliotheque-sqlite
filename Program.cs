@@ -2,6 +2,7 @@
 var readResult = "";
 int id = 0;
 int quantity = 0;
+
 while (menuSelection != "6")
 {
     Console.Clear();
@@ -69,7 +70,7 @@ while (menuSelection != "6")
                         if (readResult != null) author = readResult.Trim().ToLower();
 
                         Console.Clear();
-                        BookServices.CreateBook(title, description, author);
+                        var newBookId = BookServices.CreateBook(title, description, author);
 
                         System.Console.WriteLine();
                         System.Console.WriteLine("> Ajouter du stock ?(y/n)");
@@ -83,7 +84,8 @@ while (menuSelection != "6")
                             readResult = Console.ReadLine();
                             if (readResult != null) quantity = int.Parse(readResult.Trim());
 
-                            BookServices.FindLastBookForAddStock(quantity);
+                            BookServices.AddBook(newBookId, quantity);
+                            //BookServices.FindLastBookForAddStock(quantity);
                             System.Console.WriteLine();
                             System.Console.WriteLine("> Taper entrée pour continuer");
                             Console.Write(">");
