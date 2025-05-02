@@ -56,7 +56,7 @@ public class UserServices
         }
         /* Sans utiliser la méthode privée :
         string dbfile = @"DataSource=C:\Users\ClémentTHOREZ\Documents\C#\Projet-C#\SQLITE-Gestionnaire-bibliothèque\db\gestionnaire-bibliotheque.db";
-        var user = new User(firstName, lastName, age); // TODO FIX age en INT au lieu de string
+        var user = new User(firstName, lastName, age);
 
         using (var db = new SqliteConnection(dbfile))
         {

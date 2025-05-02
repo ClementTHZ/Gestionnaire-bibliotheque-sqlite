@@ -7,7 +7,7 @@ CREATE TABLE books (
     title TEXT UNIQUE, 
     description TEXT, 
     author TEXT, 
-    quantity INTEGER  DEFAULT 1
+    quantity INTEGER  DEFAULT 0
 );
 
 CREATE TABLE users (

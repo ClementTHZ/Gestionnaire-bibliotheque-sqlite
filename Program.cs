@@ -71,19 +71,23 @@ while (menuSelection != "6")
                         Console.Clear();
                         BookServices.CreateBook(title, description, author);
 
-                        // TODO Finir l'ajout du stock après la création si Yes
                         System.Console.WriteLine();
                         System.Console.WriteLine("> Ajouter du stock ?(y/n)");
                         Console.Write(">");
                         readResult = Console.ReadLine();
                         if ((readResult != null)) readResult.Trim().ToLower();
-                        if (readResult == "Y")
+                        if (readResult == "y")
                         {
-                            System.Console.WriteLine("> Combien de livre voulez-vous ajouer ?");
+                            System.Console.WriteLine("> Combien de livre voulez-vous ajouter ?");
                             System.Console.Write(">");
                             readResult = Console.ReadLine();
                             if (readResult != null) quantity = int.Parse(readResult.Trim());
-                            BookServices.AddBook(id, quantity);
+
+                            BookServices.FindLastBookForAddStock(quantity);
+                            System.Console.WriteLine();
+                            System.Console.WriteLine("> Taper entrée pour continuer");
+                            Console.Write(">");
+                            Console.ReadLine();
                         }
 
                         break;

@@ -6,7 +6,7 @@ public class BookServices
 {
     public static void GetAllBooks()
     {
-        var books = GetDataTable("SELECT * FROM books ORDER BY quantity ASC");
+        var books = GetDataTable("SELECT * FROM books");
         foreach (DataRow book in books.Rows)
         {
             var bookQuantity = Convert.ToInt32(book["quantity"]);
@@ -18,7 +18,7 @@ public class BookServices
                     break;
                 case < 2:
                     System.Console.WriteLine("");
-                    System.Console.WriteLine($"{book["id"]} - {book["title"]} / Autheur : {book["author"]} (Plus que {book["quantity"]} exemplaire en stock)");
+                    System.Console.WriteLine($"{book["id"]} - {book["title"]} / Autheur : {book["author"]} ({book["quantity"]} exemplaire en stock)");
                     break;
                 case > 2:
                     System.Console.WriteLine("");
@@ -38,7 +38,7 @@ public class BookServices
             if (bookQuantity < 2)
             {
                 System.Console.WriteLine("");
-                System.Console.WriteLine($"{book["id"]} - {book["title"]} / Autheur : {book["author"]} (Plus que {book["quantity"]} exemplaire en stock)");
+                System.Console.WriteLine($"{book["id"]} - {book["title"]} / Autheur : {book["author"]} ({book["quantity"]} exemplaire en stock)");
             }
             else
             {
@@ -69,7 +69,7 @@ public class BookServices
         var book = new Book(title, description, author);
         try
         {
-            ExecuteQuery("INSERT INTO books (title, description, author) VALUES (@title, @description, @author)", new Dictionary<string, object> { ["@title"] = book.Title, ["@description"] = book.Description, ["@author"] = book.Author });
+            ExecuteQuery("INSERT INTO books (title, description, author, quantity) VALUES (@title, @description, @author, 0)", new Dictionary<string, object> { ["@title"] = book.Title, ["@description"] = book.Description, ["@author"] = book.Author });
             System.Console.WriteLine("✅ Le livre à été crée avec succès");
         }
         catch (System.Exception err)
@@ -109,6 +109,19 @@ public class BookServices
             System.Console.WriteLine(err.Message);
             throw;
         }
+    }
+
+    public static void FindLastBookForAddStock(int quantity)
+    {
+        int id = 0;
+        var currBook = GetDataTable("SELECT * FROM books ORDER BY id DESC LIMIT 1");
+        foreach (DataRow book in currBook.Rows)
+        {
+            id = Convert.ToInt32(book["id"]); // TODO Comprendre pourquoi ToInt32 et non int.Parse
+        }
+        if (id != 0) AddBook(id, quantity);
+        else System.Console.WriteLine($"Id: {id}");
+
     }
 
     private static void ExecuteQuery(string sql, Dictionary<string, object> parameters)
