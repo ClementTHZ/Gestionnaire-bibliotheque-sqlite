@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "p6WAWe4OKMs=",
+  "dgSpecHash": "s/LxDQep4H4=",
   "success": true,
-  "projectFilePath": "C:\\Users\\ClémentTHOREZ\\Documents\\C#\\Projet-C#\\SQLITE-Gestionnaire-bibliothèque\\SQLITE-Gestionnaire-bibliothèque.csproj",
+  "projectFilePath": "C:\\Users\\ClémentTHOREZ\\Documents\\C#\\Projet-C#\\Sqlite\\SQLITE-Gestionnaire-bibliothèque\\SQLITE-Gestionnaire-bibliothèque.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ClémentTHOREZ\\.nuget\\packages\\microsoft.data.sqlite\\10.0.0-preview.3.25171.6\\microsoft.data.sqlite.10.0.0-preview.3.25171.6.nupkg.sha512",
     "C:\\Users\\ClémentTHOREZ\\.nuget\\packages\\microsoft.data.sqlite.core\\10.0.0-preview.3.25171.6\\microsoft.data.sqlite.core.10.0.0-preview.3.25171.6.nupkg.sha512",

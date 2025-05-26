@@ -122,9 +122,8 @@ public class EmpruntServices
         }
     }
 
-    private static object GetValue(string sql, string col, Dictionary<string, object>? parameters = null)
+    private static object GetValue(string sql, string col, Dictionary<string, object>? parameters = null) // TODO Finir la méthode et l'appliquer
     {
-        // TODO
         string dbfile = @"DataSource=C:\Users\ClémentTHOREZ\Documents\C#\Projet-C#\SQLITE-Gestionnaire-bibliothèque\db\gestionnaire-bibliotheque.db";
         using (var db = new SqliteConnection(dbfile))
         {
